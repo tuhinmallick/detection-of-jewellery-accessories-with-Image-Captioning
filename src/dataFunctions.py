@@ -53,12 +53,9 @@ def getTokenizers(lex):
     idxtoword = {}
     wordtoidx = {}
 
-    idx = 1
-    for word in lex:
+    for idx, word in enumerate(lex, start=1):
         wordtoidx[word] = idx
         idxtoword[idx] = word
-        idx += 1
-
     return idxtoword, wordtoidx
 
 
@@ -66,12 +63,9 @@ def getTokensArrays(captions_array, wordtoidx):
     token_captions_array = []
 
     for caption in captions_array:
-        tokens = []
         words = caption.split()
 
-        for word in words:
-            tokens.append(wordtoidx[word])
-
+        tokens = [wordtoidx[word] for word in words]
         token_captions_array.append(tokens)
 
     return token_captions_array

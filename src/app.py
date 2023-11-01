@@ -132,12 +132,7 @@ def predict():
                 caption = model3.generate_caption(
                     image_encoded, wordtoidx3, idxtoword3)
 
-    data = {
-        'image_path': image_name,
-        'caption': caption
-    }
-
-    return data
+    return {'image_path': image_name, 'caption': caption}
 
 
 if __name__ == "__main__":

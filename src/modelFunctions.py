@@ -161,9 +161,7 @@ class RNNModel:
         decoder2 = Dense(self.num_neurons, activation='relu')(decoder1)
 
         outputs = Dense(self.vocab_size, activation='softmax')(decoder2)
-        model = Model(inputs=[inputs1, inputs2], outputs=outputs)
-
-        return model
+        return Model(inputs=[inputs1, inputs2], outputs=outputs)
 
     def build_gru_model(self):
         inputs1 = Input(shape=(self.output_dim,))
@@ -181,9 +179,7 @@ class RNNModel:
         decoder2 = Dense(self.num_neurons, activation='relu')(decoder1)
 
         outputs = Dense(self.vocab_size, activation='softmax')(decoder2)
-        model = Model(inputs=[inputs1, inputs2], outputs=outputs)
-
-        return model
+        return Model(inputs=[inputs1, inputs2], outputs=outputs)
 
     def compile_model(self):
         if self.embedding_matrix is not None:
@@ -222,11 +218,10 @@ class RNNModel:
                     n = 0
 
     def generate_caption(self, image, wordtoidx, idxtoword):
-        x1 = []
-        x1.append(image)
+        x1 = [image]
         in_text = config.START
 
-        for i in range(self.max_length):
+        for _ in range(self.max_length):
             sequence = [wordtoidx[w]
                         for w in in_text.split() if w in wordtoidx]
             sequence = pad_sequences([sequence], maxlen=self.max_length)
@@ -234,13 +229,11 @@ class RNNModel:
             yhat = self.model.predict([np.array(x1), sequence], verbose=0)
             yhat = np.argmax(yhat)
             word = idxtoword[yhat]
-            in_text += ' ' + word
+            in_text += f' {word}'
 
             if word == config.STOP:
                 break
 
         final = in_text.split()
         final = final[1:-1]
-        final = ' '.join(final)
-
-        return final
+        return ' '.join(final)
