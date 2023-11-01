@@ -38,11 +38,11 @@ def get_num_accesories_4(captions_array):
 
     for caption in captions_array:
         word = caption.split()[1]
-        if word == 'Gargantilla' or word == 'Colgante':
+        if word in ['Gargantilla', 'Colgante']:
             num_gargantillas += 1
         elif word == 'Pendientes':
             num_pendientes += 1
-        elif word == 'Anillo' or word == "Sortija":
+        elif word in ['Anillo', "Sortija"]:
             num_anillos += 1
         elif word == 'Pulsera':
             num_pulseras += 1
@@ -63,7 +63,7 @@ def get_num_accesories_6(captions_array):
         if word == 'Pendiente' or word == 'Pendientes' and "plata" in caption:
             num_pendientes_plata += 1
 
-        elif word == 'Pendiente' or word == 'Pendientes' and "oro" in caption:
+        elif word == 'Pendientes' and "oro" in caption:
             num_pendientes_oro += 1
 
         elif word == 'Colgante' and "plata" in caption:
